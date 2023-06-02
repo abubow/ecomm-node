@@ -60,7 +60,16 @@ app.use((req, res) => {
   res.status(404).send("Page Not Found");
 });
 
-// Setup http server to listen on HTTP_PORT
-app.listen(HTTP_PORT, () => {
-  console.log("Express http server listening on port " + HTTP_PORT);
-});
+// Initialize the store-service module
+storeService
+  .initialize()
+  .then(() => {
+    // Start the server only after successful initialization
+    app.listen(HTTP_PORT, () => {
+      console.log("Express http server listening on port " + HTTP_PORT);
+    });
+  })
+  .catch((error) => {
+    // Log the error message if initialization fails
+    console.error("Error initializing store-service:", error);
+  });
