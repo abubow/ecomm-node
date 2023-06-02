@@ -9,7 +9,7 @@ function readFile(filePath) {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, "utf8", (err, data) => {
       if (err) {
-        reject("Unable to read the file");
+        reject("Unable to read the file: " + filePath + "");
       } else {
         resolve(JSON.parse(data));
       }
